@@ -1,13 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcome } from './nx-welcome';
 
 @Component({
-  imports: [NxWelcome, RouterModule],
   selector: 'app-root',
+  standalone: true,
   templateUrl: './app.html',
-  styleUrl: './app.scss',
 })
 export class App {
-  protected title = 'financial-analytics-dashboard';
+  message = '';
+
+  constructor(private http: HttpClient) {}
+
+  load() {
+    this.http.get<any>('http://localhost:3000/')
+      .subscribe(res => this.message = res.message);
+  }
 }
