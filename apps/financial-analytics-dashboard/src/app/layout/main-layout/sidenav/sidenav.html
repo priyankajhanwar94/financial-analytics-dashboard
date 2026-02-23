@@ -1,30 +1,17 @@
-<!-- <nav class="flex flex-col h-full p-4 space-y-2">
-  <a routerLink="/" class="hover:bg-gray-700 p-2 rounded">Home</a>
-  <a routerLink="/analytics" class="hover:bg-gray-700 p-2 rounded">Analytics</a>
-  <a routerLink="/reports" class="hover:bg-gray-700 p-2 rounded">Reports</a>
-</nav> -->
-
-<aside [ngClass]="collapsed ? 'w-16' : 'w-64'" 
-       class="h-96 transition-all duration-300 overflow-hidden">
-
-  <!-- Fixed Header: Logo + Bank Name (not affected by collapse) -->
-  <div class="flex items-center p-2 gap-2">
-    <button (click)="collapsed = !collapsed">
-      <img src="/assets/icons/icon.svg" class="w-6 h-6" alt="Toggle" />
-    </button>
-    <span (click)="move()">Your Bank</span>
-  </div>
-
-  <!-- Navigation (collapsible items) -->
-  <ul>
-    <li *ngFor="let item of navItems" class="flex items-center gap-2 p-2">
-      <img src="{{item.icon}}" class="w-6 h-6" alt="" />
-      <span class="overflow-hidden transition-all duration-300"
-            [class.opacity-0]="collapsed"
-            [class.max-w-0]="collapsed"
-            [class.max-w-full]="!collapsed">
-        {{ item.label }}
-      </span>
-    </li>
-  </ul>
+<aside class="">
+  <nav class="flex flex-col h-full space-y-2 py-2 align-items-center" [ngClass]="collapsed() ? 'w-20 px-4' : 'w-64 px-6'">
+    @for (item of navItems(); track item.label) {
+      <a routerLink="{{item.route}}" 
+        routerLinkActive="bg-[#343C6A] text-white"
+         class="flex items-center gap-3 hover:cursor-pointer hover:text-[#00A8C6] p-2 rounded text-[#B1B1B1] h-16" 
+         (click)="navigateTo(item.route)">
+        <img src="{{item.icon}}" class="w-6 h-6" alt="{{item.label}}" />
+        @if (!collapsed()) {
+          <span class="">
+            {{item.label}}
+          </span>
+        }
+      </a>
+    }
+  </nav>
 </aside>

@@ -1,23 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './sidenav.html',
   styleUrl: './sidenav.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Sidenav {
+  navigate = output<string>();
+  collapsed = input<boolean>(false);
+  navItems = input<any[]>([]);
 
-  collapsed = false;
-
-  navItems = [
-    { label: 'Dashboard', icon: '/assets/icons/icon.svg' },
-    { label: 'Transactions', icon: '/assets/icons/icon.svg' },
-    { label: 'Settings', icon: '/assets/icons/icon.svg' },
-  ];
-
-  move(){
-    this.collapsed = !this.collapsed;
+  navigateTo(route: string) {
+    this.navigate.emit(route);
   }
+
 }

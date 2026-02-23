@@ -6,7 +6,7 @@ export const appRoutes: Routes = [
     component: MainLayout,
     children: [
         {
-            path: '',
+            path: 'dashboard',
             loadComponent: () => import('./features/dashboard/dashboard').then(m => m.Dashboard)
         },
         {
