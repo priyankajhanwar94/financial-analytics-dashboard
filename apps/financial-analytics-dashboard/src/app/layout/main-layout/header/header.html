@@ -1,0 +1,33 @@
+<header class="h-[6rem] bg-white border-b border-gray-200 px-6 flex items-center justify-between">
+
+  <div class="flex items-center gap-4">
+    <!-- Page Title -->
+    <h1 class="text-[2rem] font-black text-[#343C6A] font-mont">
+      Bank
+    </h1>
+  </div>
+
+  <div class="flex items-center gap-6">
+    <!-- Search -->
+    <div class="hidden md:flex items-center bg-gray-100 rounded-2xl px-4 py-2 w-72 h-10">
+      <input type="text" placeholder="Search..."
+        class="bg-transparent outline-none text-sm text-gray-700 w-full placeholder-gray-400" />
+    </div>
+
+    <!-- Notifications -->
+    <button class="relative p-2 rounded-full hover:bg-gray-100 transition">
+      <img src="assets/icons/notification-bell.svg" alt="Notification Bell" class="w-6 h-6 text-gray-600"/>
+      <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+    </button>
+
+    <!-- Profile -->
+    <div class="flex items-center gap-3 cursor-pointer group">
+      <img src="assets/icons/profile.svg" alt="User" class="w-10 h-10 rounded-full" />
+      <div class="hidden sm:block">
+        <p class="text-sm font-semibold text-gray-800">Priyanka</p>
+        <p class="text-xs text-gray-500">Admin</p>
+      </div>
+    </div>
+  </div>
+
+</header>

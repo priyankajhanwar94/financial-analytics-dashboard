@@ -12,9 +12,11 @@
       "options": {
         "outputPath": "dist/apps/financial-analytics-dashboard",
         "browser": "apps/financial-analytics-dashboard/src/main.ts",
+        "index": "apps/financial-analytics-dashboard/src/index.html",
         "tsConfig": "apps/financial-analytics-dashboard/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
+          "apps/financial-analytics-dashboard/src/assets",
           {
             "glob": "**/*",
             "input": "apps/financial-analytics-dashboard/public"
