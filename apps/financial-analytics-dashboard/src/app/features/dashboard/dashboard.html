@@ -19,15 +19,15 @@
             <h1 class="text-[#343C6A] font-bold">Expense Statistics</h1>
             <div class="w-[21rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
                 <apx-chart
-                    [series]="chartOptions.series"
-                    [chart]="chartOptions.chart"
-                    [labels]="chartOptions.labels"
-                    [colors]="chartOptions.colors"
-                    [plotOptions]="chartOptions.plotOptions"
-                    [dataLabels]="chartOptions.dataLabels"
-                    [legend]="chartOptions.legend"
-                    [responsive]="chartOptions.responsive"
-                    [stroke]="chartOptions.stroke">
+                    [series]="expenseChart.series"
+                    [chart]="expenseChart.chart"
+                    [labels]="expenseChart.labels"
+                    [colors]="expenseChart.colors"
+                    [plotOptions]="expenseChart.plotOptions"
+                    [dataLabels]="expenseChart.dataLabels"
+                    [legend]="expenseChart.legend"
+                    [responsive]="expenseChart.responsive"
+                    [stroke]="expenseChart.stroke">
                 </apx-chart>
             </div>
         </div>
@@ -45,7 +45,14 @@
         <div class="">
             <h1 class="text-[#343C6A] font-bold">Balance History</h1>
             <div class="w-[46rem] h-[16rem] bg-white rounded-2xl mt-3">
-                
+                <apx-chart
+                    [series]="balanceChart.series"
+                    [chart]="balanceChart.chart"
+                    [xaxis]="balanceChart.xaxis"
+                    [dataLabels]="balanceChart.dataLabels"
+                    [grid]="balanceChart.grid"
+                    [stroke]="balanceChart.stroke"
+                ></apx-chart>
             </div>
         </div>
     </div>
