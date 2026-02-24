@@ -1,1 +1,52 @@
-<p>dashboard works!</p>
+<div class="py-8 px-10 w-full h-full flex flex-col justify-between items-center gap-6">
+    <!-- first row-->
+    <div class="flex items-center justify-between w-full">
+        @for (card of infoCard; track card.label) {
+            <app-info-card [card]="card"></app-info-card>
+        }
+    </div>
+    <!-- second row-->
+    <div class="flex items-center justify-between w-full gap-6">
+        <!-- Weekly activity -->
+        <div class="">
+            <h1 class="text-[#343C6A] font-bold" >Weekly Activity</h1>
+            <div class="w-[46rem] h-[20rem] bg-white rounded-2xl mt-3">
+
+            </div>
+        </div>
+        <!-- Expense Statitics -->
+        <div class="">
+            <h1 class="text-[#343C6A] font-bold">Expense Statistics</h1>
+            <div class="w-[21rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
+                <apx-chart
+                    [series]="chartOptions.series"
+                    [chart]="chartOptions.chart"
+                    [labels]="chartOptions.labels"
+                    [colors]="chartOptions.colors"
+                    [plotOptions]="chartOptions.plotOptions"
+                    [dataLabels]="chartOptions.dataLabels"
+                    [legend]="chartOptions.legend"
+                    [responsive]="chartOptions.responsive"
+                    [stroke]="chartOptions.stroke">
+                </apx-chart>
+            </div>
+        </div>
+    </div>
+    <!-- third row-->
+    <div class="flex items-center justify-between w-full gap-3">
+        <!-- Recent Transaction -->
+        <div class="">
+            <h1 class="text-[#343C6A] font-bold" >Recent Transaction</h1>
+            <div class="w-[21rem] h-[16rem] bg-white rounded-2xl mt-3">
+
+            </div>
+        </div>
+        <!-- Balance History -->
+        <div class="">
+            <h1 class="text-[#343C6A] font-bold">Balance History</h1>
+            <div class="w-[46rem] h-[16rem] bg-white rounded-2xl mt-3">
+                
+            </div>
+        </div>
+    </div>
+</div>
