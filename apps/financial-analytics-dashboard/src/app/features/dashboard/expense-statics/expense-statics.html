@@ -2,15 +2,15 @@
     <h1 class="text-[#343C6A] font-bold">Expense Statistics</h1>
     <div class="w-[21rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
         <apx-chart
-            [series]="expenseChart.series"
-            [chart]="expenseChart.chart"
-            [labels]="expenseChart.labels"
-            [colors]="expenseChart.colors"
-            [plotOptions]="expenseChart.plotOptions"
-            [dataLabels]="expenseChart.dataLabels"
-            [legend]="expenseChart.legend"
-            [responsive]="expenseChart.responsive"
-            [stroke]="expenseChart.stroke">
+            [series]="expenseChart().series"
+            [chart]="expenseChart().chart"
+            [labels]="expenseChart().labels"
+            [colors]="expenseChart().colors"
+            [plotOptions]="expenseChart().plotOptions"
+            [dataLabels]="expenseChart().dataLabels"
+            [legend]="expenseChart().legend"
+            [responsive]="expenseChart().responsive"
+            [stroke]="expenseChart().stroke">
         </apx-chart>
     </div>
 </div>

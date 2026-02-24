@@ -30,5 +30,4 @@ export type WeeklySpendChart = {
   tooltip: ApexTooltip;
   stroke: ApexStroke;
   legend: ApexLegend;
-  colors: string[];
 };

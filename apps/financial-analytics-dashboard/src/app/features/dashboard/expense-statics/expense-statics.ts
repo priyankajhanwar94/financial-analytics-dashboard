@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { ExpenseStaticChart } from '../dashboard.model';
 
 @Component({
   selector: 'app-expense-statics',
-  imports: [],
+  standalone: true,
+  imports: [NgApexchartsModule],
   templateUrl: './expense-statics.html',
   styleUrl: './expense-statics.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpenseStatics {
-  expenseChart=input<any[]>([])
+  expenseChart = input.required<ExpenseStaticChart>();
 }

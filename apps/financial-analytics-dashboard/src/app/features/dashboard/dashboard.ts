@@ -25,7 +25,6 @@ export class Dashboard {
           data: [44, 55, 57, 56, 61, 58, 63]
         }
       ],
-      colors: [],
       chart: {
         type: "bar",
         height: 300

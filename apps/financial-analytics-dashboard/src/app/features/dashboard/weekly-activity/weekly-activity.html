@@ -2,17 +2,16 @@
     <h1 class="text-[#343C6A] font-bold" >Weekly Activity</h1>
     <div class="w-[46rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
         <apx-chart
-            [series]="weeklySpendChart.series"
-            [chart]="weeklySpendChart.chart"
-            [dataLabels]="weeklySpendChart.dataLabels"
-            [plotOptions]="weeklySpendChart.plotOptions"
-            [yaxis]="weeklySpendChart.yaxis"
-            [legend]="weeklySpendChart.legend"
-            [fill]="weeklySpendChart.fill"
-            [stroke]="weeklySpendChart.stroke"
-            [tooltip]="weeklySpendChart.tooltip"
-            [xaxis]="weeklySpendChart.xaxis"
-            [colors]="weeklySpendChart.colors"
+            [series]="weeklySpendChart().series"
+            [chart]="weeklySpendChart().chart"
+            [dataLabels]="weeklySpendChart().dataLabels"
+            [plotOptions]="weeklySpendChart().plotOptions"
+            [yaxis]="weeklySpendChart().yaxis"
+            [legend]="weeklySpendChart().legend"
+            [fill]="weeklySpendChart().fill"
+            [stroke]="weeklySpendChart().stroke"
+            [tooltip]="weeklySpendChart().tooltip"
+            [xaxis]="weeklySpendChart().xaxis"
         ></apx-chart>
     </div>
 </div>

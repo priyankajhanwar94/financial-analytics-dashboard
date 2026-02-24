@@ -4,11 +4,12 @@ import { BalanceHistoryChart } from '../dashboard.model';
 
 @Component({
   selector: 'app-balance-history',
+  standalone: true,
   imports: [NgApexchartsModule],
   templateUrl: './balance-history.html',
   styleUrl: './balance-history.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BalanceHistory {
-  balanceChart=input<BalanceHistoryChart[]>([])
+  balanceChart = input.required<BalanceHistoryChart>();
 }
