@@ -2,10 +2,14 @@ import { Component } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { InfoCard } from '../../shared/components/info-card/info-card';
 import { BalanceHistoryChart, ExpenseStaticChart, WeeklySpendChart } from './dashboard.model';
+import { RecentTransactions } from './recent-transactions/recent-transactions';
+import { BalanceHistory } from './balance-history/balance-history';
+import { ExpenseStatics } from './expense-statics/expense-statics';
+import { WeeklyActivity } from './weekly-activity/weekly-activity';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [InfoCard, NgApexchartsModule],
+  imports: [InfoCard, NgApexchartsModule, RecentTransactions, BalanceHistory, ExpenseStatics, WeeklyActivity],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -29,7 +33,7 @@ export class Dashboard {
       plotOptions: {
         bar: {
           horizontal: false,
-          columnWidth: "55%",
+          columnWidth: "45%",
           borderRadius: 8
         }
       },
