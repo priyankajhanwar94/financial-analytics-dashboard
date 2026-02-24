@@ -1,4 +1,4 @@
-import { ApexNonAxisChartSeries, ApexChart, ApexStroke, ApexPlotOptions, ApexDataLabels, ApexLegend, ApexResponsive, ApexAxisChartSeries, ApexXAxis, ApexGrid } from "ng-apexcharts";
+import { ApexNonAxisChartSeries, ApexChart, ApexStroke, ApexPlotOptions, ApexDataLabels, ApexLegend, ApexResponsive, ApexAxisChartSeries, ApexXAxis, ApexGrid, ApexFill, ApexTooltip, ApexYAxis } from "ng-apexcharts";
 
 export type ExpenseStaticChart = {
   series: ApexNonAxisChartSeries;
@@ -19,3 +19,16 @@ export type BalanceHistoryChart = {
   grid: ApexGrid;
   stroke: ApexStroke;
 }
+export type WeeklySpendChart = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  fill: ApexFill;
+  tooltip: ApexTooltip;
+  stroke: ApexStroke;
+  legend: ApexLegend;
+  colors: string[];
+};

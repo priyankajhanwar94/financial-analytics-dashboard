@@ -10,8 +10,20 @@
         <!-- Weekly activity -->
         <div class="">
             <h1 class="text-[#343C6A] font-bold" >Weekly Activity</h1>
-            <div class="w-[46rem] h-[20rem] bg-white rounded-2xl mt-3">
-
+            <div class="w-[46rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
+                <apx-chart
+                    [series]="weeklySpendChart.series"
+                    [chart]="weeklySpendChart.chart"
+                    [dataLabels]="weeklySpendChart.dataLabels"
+                    [plotOptions]="weeklySpendChart.plotOptions"
+                    [yaxis]="weeklySpendChart.yaxis"
+                    [legend]="weeklySpendChart.legend"
+                    [fill]="weeklySpendChart.fill"
+                    [stroke]="weeklySpendChart.stroke"
+                    [tooltip]="weeklySpendChart.tooltip"
+                    [xaxis]="weeklySpendChart.xaxis"
+                    [colors]="weeklySpendChart.colors"
+                ></apx-chart>
             </div>
         </div>
         <!-- Expense Statitics -->
@@ -37,8 +49,21 @@
         <!-- Recent Transaction -->
         <div class="">
             <h1 class="text-[#343C6A] font-bold" >Recent Transaction</h1>
-            <div class="w-[21rem] h-[16rem] bg-white rounded-2xl mt-3">
-
+            <div class="w-[21rem] h-[16rem] bg-white rounded-2xl mt-3 px-4 py-8">
+                <div class="flex flex-col gap-8">
+                    @for (transaction of recentTransactions; track transaction.transactionId) {
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <img src={{transaction.icon}} alt="transaction icon" class="w-8 h-8 rounded-full" />
+                                <div class="flex flex-col w-40">
+                                    <span class="text-sm font-semibold">{{transaction.label}}</span>
+                                    <span class="text-xs text-gray-500">{{transaction.date}}</span>
+                                </div>
+                                <div class="text-sm font-semibold ml-10">{{transaction.amount}}</div>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
         <!-- Balance History -->

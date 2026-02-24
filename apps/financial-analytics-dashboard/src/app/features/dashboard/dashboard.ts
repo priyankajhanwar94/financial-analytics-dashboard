@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { InfoCard } from '../../shared/components/info-card/info-card';
-import { BalanceHistoryChart, ExpenseStaticChart } from './dashboard.model';
+import { BalanceHistoryChart, ExpenseStaticChart, WeeklySpendChart } from './dashboard.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +10,67 @@ import { BalanceHistoryChart, ExpenseStaticChart } from './dashboard.model';
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
-
+  weeklySpendChart: WeeklySpendChart = {
+      series: [
+        {
+          name: "Deposits",
+          data: [76, 85, 101, 98, 87, 105, 91]
+        },
+        {
+          name: "Withdrawals",
+          data: [44, 55, 57, 56, 61, 58, 63]
+        }
+      ],
+      colors: [],
+      chart: {
+        type: "bar",
+        height: 300
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "55%",
+          borderRadius: 8
+        }
+      },
+      dataLabels: {
+        enabled: true
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ["transparent"]
+      },
+      xaxis: {
+        categories: [
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat"
+        ]
+      },
+      yaxis: {
+        title: {
+          text: "$ (thousands)"
+        }
+      },
+      legend: {
+        show: true
+      },
+      fill: {
+        opacity: 1
+      },
+      tooltip: {
+        y: {
+          formatter: function(val) {
+            return "$ " + val + " thousands";
+          }
+        }
+      }
+    };
   expenseChart: ExpenseStaticChart = {
     series: [20, 30, 35, 15],
     chart: {
@@ -109,5 +169,11 @@ export class Dashboard {
     { label: 'Income', icon: 'assets/icons/income.svg', amount: '$2,000.00', bgColor: 'bg-[#E7EDFF]' },
     { label: 'Expense', icon: 'assets/icons/expense.svg', amount: '$2,000.00', bgColor: 'bg-[#FFE0EB]' },
     { label: 'Total Saving', icon: 'assets/icons/saving.svg', amount: '$2000.00', bgColor: 'bg-[#DCFAF8]' },
+  ];
+
+  recentTransactions =[
+    { label: 'Deposit from card', icon: 'assets/icons/card-deposit.svg', amount: '$2,00.00', bgColor: 'bg-[#FFF5D9]', transactionId: 'TXN1234567890', date:"21 Jan 2026"},
+    { label: 'Deposit Paypal', icon: 'assets/icons/paypal.svg', amount: '$12,000.00', bgColor: 'bg-[#E7EDFF]', transactionId: 'TXN1234567891', date:"22 Jan 2026"},
+    { label: 'Transfer to Mom', icon: 'assets/icons/transfer.svg', amount: '$2,000.00', bgColor: 'bg-[#DCFAF8]', transactionId: 'TXN1234567892', date:"23 Jan 2026"}
   ];
 }
