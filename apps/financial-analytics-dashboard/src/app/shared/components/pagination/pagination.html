@@ -1,0 +1,29 @@
+<div class="">
+    <div class="text-[#718EBF]">Showing {{pageSize()}} of {{totalTransactions()}} transactions</div>
+    <div class="flex items-center gap-2">
+        <button class="w-8 h-8 rounded-full bg-white flex items-center justify-center"
+            (click)="goToPage(currentPage() - 1)"
+            [disabled]="isFirstPage()"
+        >
+            <img src="assets/icons/left-arrow.svg" alt="previous"/>
+        </button>
+        <div class="flex items-center gap-1">
+            @for (page of pages(); track page) {
+                <div
+                    class="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer"
+                    [class.bg-[#396AFF]]="currentPage() === page"
+                    [class.text-white]="currentPage() === page"
+                    (click)="goToPage(page)"
+                >
+                    {{page}}
+                </div>
+            }
+        </div>
+        <button class="w-8 h-8 rounded-full bg-white flex items-center justify-center"
+            (click)="goToPage(currentPage() + 1)"
+            [disabled]="isLastPage()"
+        >
+            <img src="assets/icons/right-arrow.svg" alt="next"/>
+        </button>
+    </div>
+</div>
