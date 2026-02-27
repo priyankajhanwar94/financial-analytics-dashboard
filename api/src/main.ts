@@ -1,24 +1,34 @@
 import express from 'express';
 import cors from 'cors';
-
-const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 3000;
-
+import { transactions } from './data/transactions';
 const app = express();
 
-app.use(cors()); 
-
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
+// Allow Angular frontend
+app.use(
+  cors({
+    origin: 'http://localhost:4200'
+  })
+);
+const PAGE_SIZE = 10;
+app.get('/', (_req, res) => {
+  res.send('API ');
 });
+app.get('/transactions', (req, res) => {
+  const pageNumber = Number(req.query.pageNumber) || 1;
 
-app.get('/navItems', (req, res) => {
-  res.send({ data: [
-    { label: 'Dashboard', icon: 'assets/icons/dashboard.svg', route:'/dashboard', activeIcon: 'assets/icons/active-dashboard.svg' },
-    { label: 'Transactions', icon: 'assets/icons/transaction.svg', route:'/transactions', activeIcon: 'assets/icons/active-transaction.svg' },
-  ]});
+  const startIndex = (pageNumber - 1) * PAGE_SIZE;
+  const endIndex = startIndex + PAGE_SIZE;
+
+  const paginatedData = transactions.slice(startIndex, endIndex);
+  res.send({
+    pageNumber,
+    pageSize: PAGE_SIZE,
+    totalItems: transactions.length,
+    totalPages: Math.ceil(transactions.length / PAGE_SIZE),
+    data: paginatedData
+  });
+  // res.send({data: 'Transactions data for page ' + req.query.pageNumber});
 });
-
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
+app.listen(5000, () => {
+  console.log('Server running at http://localhost:5000');
 });

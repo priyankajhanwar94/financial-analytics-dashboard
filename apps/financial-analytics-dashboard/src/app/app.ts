@@ -10,11 +10,12 @@ import { RouterModule } from '@angular/router';
 })
 export class App {
   message = '';
+  data={};
 
   constructor(private http: HttpClient) {}
 
   load() {
-    this.http.get<any>('http://localhost:3000/')
-      .subscribe(res => this.message = res.message);
+    this.http.get<any>('http://localhost:5000/transactions?pageNumber=2')
+      .subscribe(res => this.data = res.data);
   }
 }
