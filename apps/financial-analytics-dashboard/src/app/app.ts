@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Loader } from './shared/components/loader/loader';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.html',
-  imports: [RouterModule],
+  imports: [RouterModule, Loader],
 })
 export class App {
   message = '';

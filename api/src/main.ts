@@ -19,15 +19,29 @@ app.get('/transactions', (req, res) => {
   const startIndex = (pageNumber - 1) * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
 
-  const paginatedData = transactions.slice(startIndex, endIndex);
+  const filterBy = req.query.filterBy as string;
+  let filteredTransactions = transactions;
+  if (filterBy !== 'all') {
+    filteredTransactions = transactions.filter(tx => tx.type === filterBy);
+  }
+  const paginatedData = filteredTransactions.slice(startIndex, endIndex);
+  
   res.send({
     pageNumber,
     pageSize: PAGE_SIZE,
-    totalItems: transactions.length,
-    totalPages: Math.ceil(transactions.length / PAGE_SIZE),
+    totalTransactions: filteredTransactions.length,
     data: paginatedData
   });
-  // res.send({data: 'Transactions data for page ' + req.query.pageNumber});
+});
+
+app.get('/search/:searchBy', (req, res) => {
+  const searchBy = req.params.searchBy.toLowerCase();
+  const results = transactions.filter(tx => 
+    tx.title.toLowerCase().includes(searchBy) || 
+    tx.description.toLowerCase().includes(searchBy) || 
+    tx.transactionID.toLowerCase().includes(searchBy)
+  );
+  res.send(results);
 });
 app.listen(5000, () => {
   console.log('Server running at http://localhost:5000');
