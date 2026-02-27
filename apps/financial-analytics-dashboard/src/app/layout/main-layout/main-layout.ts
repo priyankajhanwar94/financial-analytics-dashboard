@@ -16,12 +16,7 @@ export class MainLayout {
     { label: 'Dashboard', icon: 'assets/icons/dashboard.svg', route:'/dashboard', activeIcon: 'assets/icons/active-dashboard.svg' },
     { label: 'Transactions', icon: 'assets/icons/transaction.svg', route:'/transactions', activeIcon: 'assets/icons/active-transaction.svg' },
   ];
-  onNavigate(route: string) {
-    this.router
-      .navigate([route])
-      .then(() => console.log(`Navigated to ${route}`))
-      .catch((err: any) => console.error('Navigation error:', err));
-  }
+  
   toggleSidebar() {
     this.collapsed = !this.collapsed;
   }

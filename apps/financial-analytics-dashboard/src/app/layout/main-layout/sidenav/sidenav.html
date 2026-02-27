@@ -3,8 +3,7 @@
     @for (item of navItems(); track item.label) {
       <a routerLink="{{item.route}}" 
         routerLinkActive="bg-[#343C6A] text-white"
-         class="flex items-center gap-3 hover:cursor-pointer hover:text-[#00A8C6] p-2 rounded text-[#B1B1B1] h-16" 
-         (click)="navigateTo(item.route)">
+         class="flex items-center gap-3 hover:cursor-pointer hover:text-[#00A8C6] p-2 rounded text-[#B1B1B1] h-16">
         <img src="{{item.icon}}" class="w-6 h-6" alt="{{item.label}}" />
         @if (!collapsed()) {
           <span class="">
