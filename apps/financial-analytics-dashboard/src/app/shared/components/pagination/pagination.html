@@ -1,7 +1,7 @@
 <div class="">
     <div class="text-[#718EBF]">Showing {{pageSize()}} of {{totalTransactions()}} transactions</div>
     <div class="flex items-center gap-2">
-        <button class="w-8 h-8 rounded-full bg-white flex items-center justify-center"
+        <button class="w-8 h-8 flex items-center justify-center"
             (click)="goToPage(currentPage() - 1)"
             [disabled]="isFirstPage()"
         >
@@ -19,7 +19,7 @@
                 </div>
             }
         </div>
-        <button class="w-8 h-8 rounded-full bg-white flex items-center justify-center"
+        <button class="w-8 h-8 flex items-center justify-center"
             (click)="goToPage(currentPage() + 1)"
             [disabled]="isLastPage()"
         >
