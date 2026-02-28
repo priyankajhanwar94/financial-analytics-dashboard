@@ -4,8 +4,8 @@
       <button class="lg:hidden" (click)="toggleSidebar()"><img src="assets/icons/hamburger.svg" alt="Toggle Sidebar"
           class="w-6 h-6" />
       </button>
-      <div class="hidden md:flex items-center gap-4 w-56 pl-8">
-      <!-- Page Title -->
+      <div class="hidden lg:flex items-center gap-4 w-56 pl-8">
+        <!-- Page Title -->
        <img src="assets/icons/bank.svg" class="w-6 h-6" alt="icon" />
         <h1 class="text-[2rem] font-black text-[#343C6A] font-mont">
            BANK
@@ -17,7 +17,7 @@
 
   
   <div class="flex flex-row h-full w-full">
-    <app-sidenav [collapsed]="collapsed" [navItems]="navItems"></app-sidenav> 
+    <app-sidenav class="hidden md:flex" [collapsed]="isCollapsed" [navItems]="navItems"></app-sidenav> 
 
     <div class="w-full bg-[#F5F7FA]">
       <main class="">
