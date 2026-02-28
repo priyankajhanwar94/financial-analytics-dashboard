@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { TabItem } from '../../../features/transactions/transactions.model';
 
 @Component({
@@ -6,6 +6,7 @@ import { TabItem } from '../../../features/transactions/transactions.model';
   imports: [],
   templateUrl: './tab.html',
   styleUrl: './tab.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Tab {
   tabs = input<TabItem[]>([]);

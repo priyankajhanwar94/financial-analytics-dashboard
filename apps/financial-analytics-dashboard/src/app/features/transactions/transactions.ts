@@ -1,20 +1,22 @@
 import { CurrencyPipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { debounceTime, distinctUntilChanged, merge, Subject, switchMap } from 'rxjs';
 import { LoaderService } from '../../core/services/loader.service';
 import { Pagination } from '../../shared/components/pagination/pagination';
 import { Tab } from '../../shared/components/tab/tab';
-import { TabItem, Transaction, TransactionTable } from './transactions.model';
+import { TabItem, Transaction } from './transactions.model';
+import { TransactionService } from './transactions.service';
 @Component({
   selector: 'app-transactions',
   imports: [Tab, Pagination, CurrencyPipe],
   templateUrl: './transactions.html',
   styleUrl: './transactions.css',
+  providers: [TransactionService]
 })
 export class Transactions implements OnInit {
-  private http = inject(HttpClient);
+
   private loaderService = inject(LoaderService);
+  private transactionService = inject(TransactionService);
   private trigger$ = new Subject<void>();
   private search$ = new Subject<string>();
 
@@ -95,9 +97,7 @@ export class Transactions implements OnInit {
   fetchTransactions(page: number,
     tab: string,
     search: string) {
-
-    return this.http
-      .get<TransactionTable>(`http://localhost:5000/transactions?pageNumber=${page}&filterBy=${tab}&searchBy=${search}`);
+    return this.transactionService.fetchTransactions(page, tab, search);
   }
 
   onSearch(query: Event) {

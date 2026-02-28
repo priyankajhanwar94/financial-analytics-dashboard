@@ -1,10 +1,11 @@
-import { Component, computed, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
   imports: [],
   templateUrl: './pagination.html',
   styleUrl: './pagination.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Pagination {
   totalTransactions = input<number>(0);
