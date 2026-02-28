@@ -1,13 +1,16 @@
 <div class="">
     <h1 class="text-[#343C6A] font-bold">Balance History</h1>
     <div class="lg:w-[63rem] h-[16rem] bg-white rounded-2xl mt-3 p-2">
-        <apx-chart
-            [series]="balanceChart().series"
-            [chart]="balanceChart().chart"
-            [xaxis]="balanceChart().xaxis"
-            [dataLabels]="balanceChart().dataLabels"
-            [grid]="balanceChart().grid"
-            [stroke]="balanceChart().stroke"
-        ></apx-chart>
+        <ng-container *ngIf="balanceChart$ | async as chart">
+            <apx-chart
+                [series]="chart.series"
+                [chart]="chart.chart"
+                [xaxis]="chart.xaxis"
+                [dataLabels]="chart.dataLabels"
+                [grid]="chart.grid"
+                [stroke]="chart.stroke"
+            ></apx-chart>
+        </ng-container>
+
     </div>
 </div>

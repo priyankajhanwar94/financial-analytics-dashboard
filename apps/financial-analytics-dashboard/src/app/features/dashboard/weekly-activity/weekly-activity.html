@@ -1,17 +1,19 @@
 <div class="">
     <h1 class="text-[#343C6A] font-bold" >Weekly Activity</h1>
     <div class="lg:w-[63rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
-        <apx-chart
-            [series]="weeklySpendChart().series"
-            [chart]="weeklySpendChart().chart"
-            [dataLabels]="weeklySpendChart().dataLabels"
-            [plotOptions]="weeklySpendChart().plotOptions"
-            [yaxis]="weeklySpendChart().yaxis"
-            [legend]="weeklySpendChart().legend"
-            [fill]="weeklySpendChart().fill"
-            [stroke]="weeklySpendChart().stroke"
-            [tooltip]="weeklySpendChart().tooltip"
-            [xaxis]="weeklySpendChart().xaxis"
-        ></apx-chart>
+        <ng-container *ngIf="weeklySpendChart$ | async as chart">
+            <apx-chart
+                [series]="chart.series"
+                [chart]="chart.chart"
+                [dataLabels]="chart.dataLabels"
+                [plotOptions]="chart.plotOptions"
+                [yaxis]="chart.yaxis"
+                [legend]="chart.legend"
+                [fill]="chart.fill"
+                [stroke]="chart.stroke"
+                [tooltip]="chart.tooltip"
+                [xaxis]="chart.xaxis"
+            ></apx-chart>
+        </ng-container>
     </div>
 </div>

@@ -1,16 +1,18 @@
 <div class="">
     <h1 class="text-[#343C6A] font-bold">Expense Statistics</h1>
     <div class="lg:w-[21rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
-        <apx-chart
-            [series]="expenseChart().series"
-            [chart]="expenseChart().chart"
-            [labels]="expenseChart().labels"
-            [colors]="expenseChart().colors"
-            [plotOptions]="expenseChart().plotOptions"
-            [dataLabels]="expenseChart().dataLabels"
-            [legend]="expenseChart().legend"
-            [responsive]="expenseChart().responsive"
-            [stroke]="expenseChart().stroke">
-        </apx-chart>
+        <ng-container *ngIf="expenseStaticsChart$ | async as chart">
+            <apx-chart
+                [series]="chart.series"
+                [chart]="chart.chart"
+                [labels]="chart.labels"
+                [colors]="chart.colors"
+                [plotOptions]="chart.plotOptions"
+                [dataLabels]="chart.dataLabels"
+                [legend]="chart.legend"
+                [responsive]="chart.responsive"
+                [stroke]="chart.stroke">
+            </apx-chart>
+        </ng-container>
     </div>
 </div>
