@@ -20,9 +20,18 @@ app.get('/transactions', (req, res) => {
   const endIndex = startIndex + PAGE_SIZE;
 
   const filterBy = req.query.filterBy as string;
+  const searchBy = req.query.searchBy as string;
+
   let filteredTransactions = transactions;
   if (filterBy !== 'all') {
     filteredTransactions = transactions.filter(tx => tx.type === filterBy);
+  }
+  if (searchBy) {
+    filteredTransactions = filteredTransactions.filter(tx => 
+      tx.title.toLowerCase().includes(searchBy.toLowerCase()) || 
+      tx.description.toLowerCase().includes(searchBy.toLowerCase()) || 
+      tx.transactionID.toLowerCase().includes(searchBy.toLowerCase())
+    );
   }
   const paginatedData = filteredTransactions.slice(startIndex, endIndex);
   
@@ -34,15 +43,6 @@ app.get('/transactions', (req, res) => {
   });
 });
 
-app.get('/search/:searchBy', (req, res) => {
-  const searchBy = req.params.searchBy.toLowerCase();
-  const results = transactions.filter(tx => 
-    tx.title.toLowerCase().includes(searchBy) || 
-    tx.description.toLowerCase().includes(searchBy) || 
-    tx.transactionID.toLowerCase().includes(searchBy)
-  );
-  res.send(results);
-});
 app.listen(5000, () => {
   console.log('Server running at http://localhost:5000');
 });

@@ -1,52 +1,73 @@
 <div class="py-8 px-10 w-full h-full flex flex-col justify-between gap-6">
-    <app-tab [tabs]="transactionTabs" (tabChange)="onTabChange($event)">
-    </app-tab>
-    <div>
-        <table class="w-full text-left">
-            <thead>
-                <tr class="text-[#343C6A] font-bold border-b border-gray-200">
-                    <th class="pb-4">Description</th>
-                    <th class="pb-4">Transaction ID</th>
-                    <th class="pb-4">Type</th>
-                    <th class="pb-4">Card</th>
-                    <th class="pb-4">Date</th>
-                    <th class="pb-4">Amount</th>
-                    <th class="pb-4">Receipt</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (transaction of transactions(); track transaction.id) {
-                <tr class="border-b border-gray-200">
-                    <td class="py-4 font-bold text-[#343C6A]">
-                        {{transaction.description}}
-                    </td>
-                    <td>
-                        {{transaction.transactionID}}
-                    </td>
-                    <td>
-                        {{transaction.type}}
-                    </td>
-                    <td>
-                        {{transaction.card}}
-                    </td>
-                    <td>
-                        {{transaction.date}}
-                    </td>
-                    <td [class.text-green-500]="transaction.type === 'Credit'"
-                        [class.text-red-500]="transaction.type === 'Debit'">
-                        {{transaction.amount | currency:transaction.currency}}
-                    </td>
-                    <td class="">
-                        <div class="text-[#396AFF] border border-[#396AFF] rounded-md px-3 py-1 w-max cursor-pointer">
-                            Download
-                        </div>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
+    <div class="flex items-center justify-between gap-6 w-full">
+        <!-- Tabs -->
+        <app-tab [tabs]="transactionTabs" (tabChange)="onTabChange($event)">
+        </app-tab>
+        <!-- Search -->
+        <div class="flex items-center bg-gray-100 border border-[#396AFF] rounded-2xl px-4 py-2 w-72 h-10">
+            <input type="text" placeholder="Search..."
+                class="bg-transparent outline-none text-sm text-gray-700 w-full placeholder-gray-400"
+                (input)="onSearch($event)" />
+        </div>
     </div>
-    <app-pagination class="flex justify-end" [currentPage]="currentPage()" [pageSize]="pageSize"
-        [totalTransactions]="totalTransactions" (pageChange)="onPageChange($event)">
-    </app-pagination>
+
+    <div>
+        @if (transactions().length > 0) {
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="text-[#343C6A] font-bold border-b border-gray-200">
+                        <th class="pb-4">Description</th>
+                        <th class="pb-4">Transaction ID</th>
+                        <th class="pb-4">Type</th>
+                        <th class="pb-4">Card</th>
+                        <th class="pb-4">Date</th>
+                        <th class="pb-4">Amount</th>
+                        <th class="pb-4">Receipt</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (transaction of transactions(); track transaction.transactionID) {
+
+                    <tr class="border-b border-gray-200">
+                        <td class="py-4 font-bold text-[#343C6A]">
+                            {{ transaction.description }}
+                        </td>
+                        <td>
+                            {{ transaction.transactionID }}
+                        </td>
+                        <td>
+                            {{ transaction.type }}
+                        </td>
+                        <td>
+                            {{ transaction.card }}
+                        </td>
+                        <td>
+                            {{ transaction.date }}
+                        </td>
+                        <td [class.text-green-500]="transaction.type === 'Credit'"
+                            [class.text-red-500]="transaction.type === 'Debit'">
+                            {{ transaction.amount | currency: transaction.currency }}
+                        </td>
+                        <td>
+                            <div class="text-[#396AFF] border border-[#396AFF] rounded-md px-3 py-1 w-max cursor-pointer">
+                                Download
+                            </div>
+                        </td>
+                    </tr>
+
+                    }
+                </tbody>
+            </table>
+        } @else {
+            <div class="flex flex-col items-center gap-4 py-16">
+                <p class="text-gray-500 text-sm">No transactions found.</p>
+            </div>
+        }
+    </div>
+    @if (transactions().length > 0) {
+        <app-pagination class="flex justify-end" [currentPage]="currentPage()" [pageSize]="pageSize"
+            [totalTransactions]="totalTransactions" (pageChange)="onPageChange($event)">
+        </app-pagination>
+    }
 </div>
