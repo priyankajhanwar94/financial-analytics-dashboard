@@ -43,7 +43,14 @@ app.get('/transactions', (req, res) => {
     data: paginatedData
   });
 });
-
+app.get('/login', (req, res) => {
+  const loginData = {
+    token:"35678",
+    username: req.params,
+    userType: 'admin'
+  };
+  res.send(loginData);
+});
 app.get('/weekly-activity', (req, res) => {
   const weeklyActivity = [
     { "day": "Sun", "deposits": 76, "withdrawals": 44 },

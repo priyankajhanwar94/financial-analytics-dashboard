@@ -7,6 +7,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-main-layout',
+  standalone: true,
   imports: [Header, Sidenav, RouterModule],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css',

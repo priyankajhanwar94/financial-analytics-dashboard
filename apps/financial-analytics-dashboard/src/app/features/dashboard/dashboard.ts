@@ -8,6 +8,7 @@ import { WeeklyActivity } from './weekly-activity/weekly-activity';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   imports: [InfoCard, NgApexchartsModule, RecentTransactions, BalanceHistory, ExpenseStatics, WeeklyActivity],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',

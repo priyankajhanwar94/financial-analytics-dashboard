@@ -1,0 +1,30 @@
+<div class="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div class="bg-white w-full max-w-md p-8 rounded-2xl shadow-lg">
+
+        <h1 class="text-2xl font-semibold text-center text-[#343C6A] mb-6">
+            Login
+        </h1>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
+
+            <!-- Username -->
+            <div class="flex flex-col">
+                <label class="text-sm font-bold text-gray-600 mb-1">Username</label>
+                <input type="text" formControlName="username"
+                    class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#343C6A]" />
+            </div>
+
+            <!-- Password -->
+            <div class="flex flex-col">
+                <label class="text-sm font-bold text-gray-600 mb-1">Password</label>
+                <input type="password" formControlName="password"
+                    class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#343C6A]" />
+            </div>
+
+            <button type="submit" class="w-full bg-[#343C6A] text-white py-2 rounded-lg hover:opacity-90 transition">
+                Login
+            </button>
+
+        </form>
+    </div>
+</div>

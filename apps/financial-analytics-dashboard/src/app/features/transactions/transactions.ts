@@ -8,6 +8,7 @@ import { TabItem, Transaction } from './transactions.model';
 import { TransactionService } from './transactions.service';
 @Component({
   selector: 'app-transactions',
+  standalone: true,
   imports: [Tab, Pagination, CurrencyPipe],
   templateUrl: './transactions.html',
   styleUrl: './transactions.css',
