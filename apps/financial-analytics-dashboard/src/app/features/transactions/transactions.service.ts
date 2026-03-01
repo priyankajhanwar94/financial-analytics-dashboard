@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import { TransactionTable } from './transactions.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'apps/financial-analytics-dashboard/src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class TransactionService {
@@ -10,6 +11,6 @@ export class TransactionService {
       tab: string,
       search: string) {
       return this.http
-        .get<TransactionTable>(`http://localhost:5000/transactions?pageNumber=${page}&filterBy=${tab}&searchBy=${search}`);
+        .get<TransactionTable>(`${environment.apiUrl}/transactions?pageNumber=${page}&filterBy=${tab}&searchBy=${search}`);
     }
 }
