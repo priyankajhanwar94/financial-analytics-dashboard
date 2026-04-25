@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npx nx build financial-analytics-dashboard --configuration=production",
+  "outputDirectory": "dist/apps/financial-analytics-dashboard",
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ]
+}
