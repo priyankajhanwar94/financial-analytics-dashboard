@@ -11,12 +11,7 @@ const app = express();
 const PAGE_SIZE = 10;
 const PORT = process.env.PORT || 5000;
 
-// Allow Angular frontend
-app.use(
-  cors({
-    origin: '*'
-  })
-);
+app.use(cors({ origin: '*' }));
 
 app.get('/', (_req, res) => {
   res.send('API ');
