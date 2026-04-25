@@ -1,16 +1,13 @@
 <aside class="">
-  <nav class="flex flex-col h-full space-y-2 py-2 align-items-center" [ngClass]="collapsed() ? 'w-20 px-4' : 'w-64 px-6'">
+  <nav class="flex flex-col h-full space-y-2 py-2 transition-all duration-300 w-64 px-6">
     @for (item of navItems(); track item.label) {
-      <a routerLink="{{item.route}}" 
-        routerLinkActive="bg-[#343C6A] text-white"
-         class="flex items-center gap-3 hover:cursor-pointer hover:text-[#00A8C6] p-2 rounded text-[#B1B1B1] h-16">
-        <img src="{{item.icon}}" class="w-6 h-6" alt="{{item.label}}" />
-        @if (!collapsed()) {
-          <span class="">
-            {{item.label}}
-          </span>
-        }
-      </a>
+    <a routerLink="{{item.route}}" (click)="onItemClick()" routerLinkActive="bg-[#343C6A] text-white"
+      class="flex items-center gap-3 hover:cursor-pointer hover:text-[#00A8C6] p-2 rounded text-[#B1B1B1] h-16">
+      <img src="{{item.icon}}" class="w-6 h-6" alt="{{item.label}}" />
+      <span>
+        {{item.label}}
+      </span>
+    </a>
     }
   </nav>
 </aside>

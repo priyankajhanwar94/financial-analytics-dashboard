@@ -21,7 +21,7 @@ app.get('/', (_req, res) => {
   res.send('API ');
 });
 
-app.get('/login', (req, res) => {
+app.post('/login', (req, res) => {
   const data = loginData;
   res.send(data);
 });

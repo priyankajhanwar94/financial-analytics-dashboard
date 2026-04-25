@@ -1,36 +1,47 @@
-import { Component, DestroyRef, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { Header } from './header/header';
 import { Sidenav } from './sidenav/sidenav';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [Header, Sidenav, RouterModule],
+  imports: [Header, Sidenav, RouterModule, CommonModule],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css',
 })
 export class MainLayout {
-  private breakpointObserver = inject(BreakpointObserver);
-  private destroyRef = inject(DestroyRef);
-  router: any;
-  isCollapsed: boolean = true;
+  isSidebarOpen: boolean = false;
   navItems = [
-    { label: 'Dashboard', icon: 'assets/icons/dashboard.svg', route:'/dashboard', activeIcon: 'assets/icons/active-dashboard.svg' },
-    { label: 'Transactions', icon: 'assets/icons/transaction.svg', route:'/transactions', activeIcon: 'assets/icons/active-transaction.svg' },
+    { label: 'Dashboard', icon: 'assets/icons/dashboard.svg', route:'/main/dashboard', activeIcon: 'assets/icons/active-dashboard.svg' },
+    { label: 'Transactions', icon: 'assets/icons/transaction.svg', route:'/main/transactions', activeIcon: 'assets/icons/active-transaction.svg' },
   ];
-  
-  ngOnInit() {
-    this.breakpointObserver
-      .observe(['(max-width: 768px)'])
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(result => {
-        this.isCollapsed = result.matches;
+  pageTitle = 'Dashboard';
+
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.pageTitle = this.getTitle(this.route);
       });
   }
+
+    private getTitle(route: ActivatedRoute): string {
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+
+    return route.snapshot.data['title'] || 'Dashboard';
+  }
+  
   toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+  onSidebarItemClick() {
+    if (window.innerWidth < 768) {
+      this.isSidebarOpen = false;
+    }
   }
 }

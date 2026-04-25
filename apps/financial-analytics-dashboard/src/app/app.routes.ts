@@ -18,11 +18,13 @@ export const appRoutes: Routes = [
         children: [
             {
                 path: 'dashboard',
+                data: { title: 'Dashboard' },
                 loadComponent: () => import('./features/dashboard/dashboard').then(m => m.Dashboard),
-                canActivate: [authGuard]
+                canActivate: [authGuard],
             },
             {
                 path: 'transactions',
+                data: { title: 'Transactions' },
                 loadComponent: () => import('./features/transactions/transactions').then(m => m.Transactions)
             }
         ]

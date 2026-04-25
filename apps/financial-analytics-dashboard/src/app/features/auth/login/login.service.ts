@@ -8,6 +8,8 @@ export class LoginService {
     private http = inject(HttpClient);
     login(payload:Login){
       return this.http
-        .get<LoginData[]>(`${environment.apiUrl}/login`,{params : payload});
+        .post<LoginData[]>(`${environment.apiUrl}/login`, {
+          ...payload
+        });
     }
 }

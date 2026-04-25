@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -11,6 +11,9 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Sidenav {
-  collapsed = input<boolean>(false);
   navItems = input<any[]>([]);
+  itemSelected = output<void>();
+  onItemClick() {
+    this.itemSelected.emit();
+  }
 }
