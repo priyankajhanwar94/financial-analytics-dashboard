@@ -9,11 +9,12 @@ import { balanceHistory } from './data/balanceHistory';
 import { recentTransactions } from './data/recentTransactions';
 const app = express();
 const PAGE_SIZE = 10;
+const PORT = process.env.PORT || 5000;
 
 // Allow Angular frontend
 app.use(
   cors({
-    origin: 'http://localhost:4200'
+    origin: '*'
   })
 );
 
@@ -76,6 +77,6 @@ app.get('/transactions', (req, res) => {
   });
 });
 
-app.listen(5000, () => {
-  console.log('Server running at http://localhost:5000');
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
