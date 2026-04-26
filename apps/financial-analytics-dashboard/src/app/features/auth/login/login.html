@@ -12,6 +12,11 @@
                 <label class="text-sm font-bold text-gray-600 mb-1">Username</label>
                 <input type="text" formControlName="username"
                     class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#343C6A]" />
+                @if(loginForm.get('username')?.touched && loginForm.get('username')?.invalid){
+                     <p class="text-red-500 text-sm mt-1">
+                        Username is required
+                    </p>
+                }
             </div>
 
             <!-- Password -->
@@ -19,9 +24,17 @@
                 <label class="text-sm font-bold text-gray-600 mb-1">Password</label>
                 <input type="password" formControlName="password"
                     class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#343C6A]" />
+                @if(loginForm.get('password')?.touched && loginForm.get('password')?.invalid){
+                    <p class="text-red-500 text-sm mt-1">
+                        Password is required
+                    </p>
+                }
             </div>
 
-            <button type="submit" class="w-full bg-[#343C6A] text-white py-2 rounded-lg hover:opacity-90 transition">
+            <button type="submit" 
+                    class="w-full bg-[#343C6A] text-white py-2 rounded-lg hover:opacity-90 transition 
+                           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:opacity-50"
+                           [disabled]="loginForm.invalid">
                 Login
             </button>
 
