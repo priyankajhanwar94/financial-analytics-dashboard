@@ -1,6 +1,6 @@
-<div class="">
+<div class="w-full md:flex-1">
     <h1 class="text-[#343C6A] font-bold">Expense Statistics</h1>
-    <div class="lg:w-[21rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
+    <div class="w-full h-[300px] md:h-[320px] bg-white rounded-2xl mt-3 p-2 overflow-hidden">
         <ng-container *ngIf="expenseStaticsChart$ | async as state">
             <!-- Loading -->
             <div *ngIf="state.status === 'loading'" class="flex justify-center items-center h-full">
@@ -13,7 +13,7 @@
             </div>
 
             <!-- Success -->
-             <apx-chart *ngIf="state.status === 'success'" [series]="state.data.series" [chart]="state.data.chart"
+             <apx-chart class="w-full h-full block" *ngIf="state.status === 'success'" [series]="state.data.series" [chart]="state.data.chart"
                 [labels]="state.data.labels" [colors]="state.data.colors" [plotOptions]="state.data.plotOptions"
                 [dataLabels]="state.data.dataLabels" [legend]="state.data.legend" [responsive]="state.data.responsive"
                 [stroke]="state.data.stroke"> 

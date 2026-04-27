@@ -37,7 +37,8 @@ export class ExpenseStatics {
       series: series,
       chart: {
         type: 'donut',
-        height: 400
+        height: '100%',
+        width: '100%'
       },
       stroke: {
         show: true,

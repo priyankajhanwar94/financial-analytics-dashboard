@@ -1,6 +1,6 @@
-<div class="">
+<div class="w-full md:flex-1">
     <h1 class="text-[#343C6A] font-bold">Recent Transaction</h1>
-    <div class="lg:w-[21rem] h-[16rem] bg-white rounded-2xl mt-3 px-4 py-8">
+    <div class="w-full min-h-[16rem] bg-white rounded-2xl mt-3 px-4 py-8">
         @let state = (recentTransactions$ | async);
 
         @if (!state || state.status === 'loading'){
@@ -21,16 +21,16 @@
         @else if (state.status === 'success') {
         <div class="flex flex-col gap-8">
             @for (transaction of state.data; track transaction.transactionId) {
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <img [src]="transaction.icon" class="w-8 h-8 rounded-full" />
-                    <div class="flex flex-col w-40">
-                        <span class="text-sm font-semibold">{{transaction.label}}</span>
+            <div class="flex items-center w-full">
+                <div class="flex items-center gap-3 flex-1 min-w-0">
+                    <img [src]="transaction.icon" class="w-8 h-8 rounded-full shrink-0" />
+                    <div class="flex flex-col min-w-0">
+                        <span class="text-sm font-semibold truncate">{{transaction.label}}</span>
                         <span class="text-xs text-gray-500">{{transaction.date}}</span>
                     </div>
-                    <div class="text-sm font-semibold ml-10">
-                        {{transaction.amount}}
-                    </div>
+                </div>
+                <div class="text-sm font-semibold text-right whitespace-nowrap ml-2">
+                    {{transaction.amount}}
                 </div>
             </div>
             }

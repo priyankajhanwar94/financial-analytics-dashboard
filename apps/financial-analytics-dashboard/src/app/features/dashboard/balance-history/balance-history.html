@@ -1,6 +1,6 @@
-<div class="">
+<div class="w-full md:flex-[2]">
     <h1 class="text-[#343C6A] font-bold">Balance History</h1>
-    <div class="lg:w-[63rem] h-[16rem] bg-white rounded-2xl mt-3 p-2">
+    <div class="w-full h-[16rem] bg-white rounded-2xl mt-3 p-2">
         <ng-container *ngIf="balanceChart$ | async as state">
             <!-- Loading -->
             <div *ngIf="state.status === 'loading'" class="flex justify-center items-center h-full">
