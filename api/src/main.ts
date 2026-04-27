@@ -27,6 +27,7 @@ app.post('/login', (req, res) => {
 
 app.get('/weekly-activity', (req, res) => {
   const data = weeklyActivity;
+  // return res.status(401).send({ error: 'Service unavailable' });
   setTimeout(() => {
     res.send(data);
   }, 1000);
@@ -34,6 +35,7 @@ app.get('/weekly-activity', (req, res) => {
 
 app.get('/expense-statics', (req, res) => {
   const data = expenseStatics;
+  // return res.status(401).send({ error: 'Service unavailable' });
   setTimeout(() => {
     res.send(data);
   }, 1000);
@@ -41,6 +43,7 @@ app.get('/expense-statics', (req, res) => {
 
 app.get('/balance-history', (req, res) => {
   const data = balanceHistory;
+  // return res.status(401).send({ error: 'Service unavailable' });
   setTimeout(() => {
     res.send(data);
   }, 1000);
@@ -48,6 +51,7 @@ app.get('/balance-history', (req, res) => {
 
 app.get('/recent-transactions', (req, res) => {
   const data = recentTransactions;
+  // return res.status(401).send({ error: 'Service unavailable' });
     setTimeout(() => {
     res.send(data);
   }, 1000);
@@ -74,7 +78,7 @@ app.get('/transactions', (req, res) => {
     );
   }
   const paginatedData = filteredTransactions.slice(startIndex, endIndex);
-  
+  // return res.status(401).send({ error: 'Service unavailable' });
   res.send({
     pageNumber,
     pageSize: PAGE_SIZE,
