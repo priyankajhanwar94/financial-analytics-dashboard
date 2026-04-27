@@ -1,2 +1,4 @@
-<app-loader></app-loader>
+@if(this.isLoading | async){
+    <app-loader></app-loader>
+}
 <router-outlet></router-outlet>
