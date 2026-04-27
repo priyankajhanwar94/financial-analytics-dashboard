@@ -1,7 +1,7 @@
 <div class="">
     <h1 class="text-[#343C6A] font-bold">Balance History</h1>
     <div class="lg:w-[63rem] h-[16rem] bg-white rounded-2xl mt-3 p-2">
-        <ng-container *ngIf="balanceChart$ | async as chart">
+        <ng-container *ngIf="balanceChart$ | async as chart, else loading">
             <apx-chart
                 [series]="chart.series"
                 [chart]="chart.chart"
@@ -11,6 +11,10 @@
                 [stroke]="chart.stroke"
             ></apx-chart>
         </ng-container>
-
+        <ng-template #loading>
+            <div class="flex justify-center items-center h-full">
+                <p class="text-gray-500 text-lg">Loading...</p>
+            </div>
+        </ng-template>
     </div>
 </div>

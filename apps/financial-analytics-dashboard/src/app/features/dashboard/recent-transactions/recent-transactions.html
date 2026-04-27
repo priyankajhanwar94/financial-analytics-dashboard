@@ -1,19 +1,31 @@
 <div class="">
     <h1 class="text-[#343C6A] font-bold" >Recent Transaction</h1>
     <div class="lg:w-[21rem] h-[16rem] bg-white rounded-2xl mt-3 px-4 py-8">
-        <div class="flex flex-col gap-8">
-            @for (transaction of recentTransactions$ | async; track transaction.transactionId) {
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <img src={{transaction.icon}} alt="transaction icon" class="w-8 h-8 rounded-full" />
-                        <div class="flex flex-col w-40">
-                            <span class="text-sm font-semibold">{{transaction.label}}</span>
-                            <span class="text-xs text-gray-500">{{transaction.date}}</span>
-                        </div>
-                        <div class="text-sm font-semibold ml-10">{{transaction.amount}}</div>
-                    </div>
-                </div>
-            }
+        @let transactions = recentTransactions$ | async;
+        @if (!transactions) {
+            <div class="flex justify-center items-center h-full">
+                <p class="text-gray-500 text-lg">Loading...</p>
+            </div>
+        }
+        @else if (transactions.length === 0) {
+        <div class="text-gray-400 flex justify-center items-center h-full">
+            No recent transactions
         </div>
+        }@else {
+            <div class="flex flex-col gap-8">
+                @for (transaction of transactions; track transaction.transactionId) {
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src={{transaction.icon}} alt="transaction icon" class="w-8 h-8 rounded-full" />
+                            <div class="flex flex-col w-40">
+                                <span class="text-sm font-semibold">{{transaction.label}}</span>
+                                <span class="text-xs text-gray-500">{{transaction.date}}</span>
+                            </div>
+                            <div class="text-sm font-semibold ml-10">{{transaction.amount}}</div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
     </div>
 </div>

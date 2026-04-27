@@ -1,7 +1,7 @@
 <div class="">
     <h1 class="text-[#343C6A] font-bold">Expense Statistics</h1>
     <div class="lg:w-[21rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
-        <ng-container *ngIf="expenseStaticsChart$ | async as chart">
+        <ng-container *ngIf="expenseStaticsChart$ | async as chart, else loading">
             <apx-chart
                 [series]="chart.series"
                 [chart]="chart.chart"
@@ -14,5 +14,10 @@
                 [stroke]="chart.stroke">
             </apx-chart>
         </ng-container>
+        <ng-template #loading>
+            <div class="flex justify-center items-center h-full">
+                <p class="text-gray-500 text-lg">Loading...</p>
+            </div>
+        </ng-template>
     </div>
 </div>

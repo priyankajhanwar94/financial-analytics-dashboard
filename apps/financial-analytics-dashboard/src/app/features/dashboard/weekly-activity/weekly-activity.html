@@ -1,7 +1,7 @@
 <div class="">
     <h1 class="text-[#343C6A] font-bold" >Weekly Activity</h1>
     <div class="lg:w-[63rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
-        <ng-container *ngIf="weeklySpendChart$ | async as chart">
+        <ng-container *ngIf="weeklySpendChart$ | async as chart, else loading">
             <apx-chart
                 [series]="chart.series"
                 [chart]="chart.chart"
@@ -15,5 +15,10 @@
                 [xaxis]="chart.xaxis"
             ></apx-chart>
         </ng-container>
+        <ng-template #loading>
+            <div class="flex justify-center items-center h-full">
+                <p class="text-gray-500 text-lg">Loading...</p>
+            </div>
+        </ng-template>
     </div>
 </div>
