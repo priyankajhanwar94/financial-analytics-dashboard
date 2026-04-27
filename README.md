@@ -36,3 +36,20 @@ Password: 123
 Frontend handles UI + state management
 Backend provides mock secured APIs
 Token-based auth middleware protects routes
+
+## Run Locally
+- Backend (Node + Express)
+cd api/
+npm install
+npm run dev
+Runs on http://localhost:5000
+
+- Frontend (Angular - Nx)
+npx nx serve financial-analytics-dashboard
+Runs on http://localhost:4200
+
+- update environment.ts file to point to backend
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:5000'
+};
