@@ -1,23 +1,23 @@
 <div class="">
     <h1 class="text-[#343C6A] font-bold">Expense Statistics</h1>
     <div class="lg:w-[21rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
-        <ng-container *ngIf="expenseStaticsChart$ | async as chart, else loading">
-            <apx-chart
-                [series]="chart.series"
-                [chart]="chart.chart"
-                [labels]="chart.labels"
-                [colors]="chart.colors"
-                [plotOptions]="chart.plotOptions"
-                [dataLabels]="chart.dataLabels"
-                [legend]="chart.legend"
-                [responsive]="chart.responsive"
-                [stroke]="chart.stroke">
+        <ng-container *ngIf="expenseStaticsChart$ | async as state">
+            <!-- Loading -->
+            <div *ngIf="state.status === 'loading'" class="flex justify-center items-center h-full">
+                Loading...
+            </div>
+
+            <!-- Error -->
+            <div *ngIf="state.status === 'error'" class="text-red-500 flex justify-center items-center h-full">
+                {{ state.error }}
+            </div>
+
+            <!-- Success -->
+             <apx-chart *ngIf="state.status === 'success'" [series]="state.data.series" [chart]="state.data.chart"
+                [labels]="state.data.labels" [colors]="state.data.colors" [plotOptions]="state.data.plotOptions"
+                [dataLabels]="state.data.dataLabels" [legend]="state.data.legend" [responsive]="state.data.responsive"
+                [stroke]="state.data.stroke"> 
             </apx-chart>
         </ng-container>
-        <ng-template #loading>
-            <div class="flex justify-center items-center h-full">
-                <p class="text-gray-500 text-lg">Loading...</p>
-            </div>
-        </ng-template>
     </div>
 </div>

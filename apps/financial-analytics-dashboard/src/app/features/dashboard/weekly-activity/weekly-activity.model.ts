@@ -17,3 +17,7 @@ export type WeeklyActivityModel = {
   deposits: number;
   withdrawals: number;
 }
+export type WeeklyState =
+  | { status: 'loading' }
+  | { status: 'error'; error: string }
+  | { status: 'success'; data: WeeklySpendChart };

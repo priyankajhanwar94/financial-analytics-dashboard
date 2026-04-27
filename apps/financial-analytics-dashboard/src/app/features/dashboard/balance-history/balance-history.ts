@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { map } from 'rxjs';
-import { BalanceHistoryChart, BalanceHistoryModel } from './balance-history.model';
+import { catchError, map, of, startWith } from 'rxjs';
+import { BalanceHistoryChart, BalanceHistoryModel, BalanceHistoryState } from './balance-history.model';
 import { BalanceHistoryService } from './balance-history.service';
 
 @Component({
@@ -17,7 +17,17 @@ export class BalanceHistory {
   private balanceHistoryService = inject(BalanceHistoryService);
 
   balanceChart$ = this.balanceHistoryService.fetchBalanceHistory().pipe(
-    map(txns => this.mapToUI(txns))
+    map(txns => ({
+      status: 'success',
+      data: this.mapToUI(txns)
+    } as BalanceHistoryState)),
+    startWith({
+      status: 'loading'
+    } as BalanceHistoryState),
+    catchError(() => of({
+      status: 'error',
+      error: 'Failed to load expense statics'
+    } as BalanceHistoryState))
   );
 
   mapToUI(txns: BalanceHistoryModel[]): BalanceHistoryChart {

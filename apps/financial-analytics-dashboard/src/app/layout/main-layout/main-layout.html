@@ -15,15 +15,10 @@
     <app-header [pageTitle]="pageTitle" class="w-full"></app-header>
   </header>
 
-
   <div class="flex flex-row h-full w-full">
-    <app-sidenav 
-      [ngClass]="{
-        'hidden': !isSidebarOpen,
-        'flex': isSidebarOpen,
-        'md:flex': true
-      }"
-      class="fixed md:static top-[6rem] left-0 h-[calc(100%-6rem)] z-50 bg-white" 
+    <app-sidenav
+      [ngClass]="{ 'hidden': !isSidebarOpen }"
+      class="md:flex fixed md:static top-[6rem] left-0 h-[calc(100%-6rem)] z-50 bg-white" 
       [navItems]="navItems"
       (itemSelected)="onSidebarItemClick()"></app-sidenav>
 

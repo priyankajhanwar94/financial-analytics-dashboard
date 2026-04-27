@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { map } from 'rxjs';
-import { ExpenseStaticChart, ExpenseStaticsModel } from './expense-statics.model';
+import { catchError, map, of, startWith } from 'rxjs';
+import { ExpenseStaticChart, ExpenseStaticsModel, ExpenseStaticsState } from './expense-statics.model';
 import { ExpenseStaticsService } from './expense-statics.service';
 
 @Component({
@@ -17,8 +17,18 @@ export class ExpenseStatics {
   private expenseStaticsService = inject(ExpenseStaticsService);
 
   expenseStaticsChart$ = this.expenseStaticsService.fetchExpenseStatics().pipe(
-    map(txns => this.mapDataToChart(txns))
-  );
+    map(txns => ({
+        status: 'success',
+        data: this.mapDataToChart(txns)
+      } as ExpenseStaticsState)),
+      startWith({
+        status: 'loading'
+      } as ExpenseStaticsState),
+      catchError(() => of({
+        status: 'error',
+        error: 'Failed to load expense statics'
+      } as ExpenseStaticsState))
+    );
 
   mapDataToChart(data: ExpenseStaticsModel[]): ExpenseStaticChart {
     const series = data.map(item => item.percent);

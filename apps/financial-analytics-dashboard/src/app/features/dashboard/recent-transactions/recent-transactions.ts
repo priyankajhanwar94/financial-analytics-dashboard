@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { map } from 'rxjs';
-import { RecentTransaction, Transaction } from './recent-transactions.model';
+import { catchError, map, of, startWith } from 'rxjs';
+import { RecentTransaction, RecentTransactionsState, Transaction } from './recent-transactions.model';
 import { RecentTransactionsService } from './recent-transactions.service';
 
 @Component({
@@ -30,8 +30,18 @@ export class RecentTransactions {
   };
 
   recentTransactions$ = this.recentTransactionsService.fetchRecentTransactions().pipe(
-    map(txns => this.mapToUI(txns)
-    ));
+    map(txns => ({
+      status: 'success',
+      data: this.mapToUI(txns)
+    } as RecentTransactionsState)),
+    startWith({
+      status: 'loading'
+    } as RecentTransactionsState),
+    catchError(() => of({
+      status: 'error',
+      error: 'Failed to load expense statics'
+    } as RecentTransactionsState))
+  );
 
   mapToUI(txns: Transaction[]): RecentTransaction[] {
     return txns.map(txn => ({

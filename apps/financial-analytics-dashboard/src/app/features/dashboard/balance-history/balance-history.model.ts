@@ -13,3 +13,8 @@ export type BalanceHistoryModel = {
   month: string;
   balance: number;
 }
+
+export type BalanceHistoryState =
+  | { status: 'loading' }
+  | { status: 'error'; error: string }
+  | { status: 'success'; data: BalanceHistoryChart };

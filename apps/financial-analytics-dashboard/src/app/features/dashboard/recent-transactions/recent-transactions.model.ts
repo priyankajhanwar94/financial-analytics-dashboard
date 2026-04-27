@@ -17,3 +17,8 @@ export interface Transaction {
   date: string;
   direction: 'credit' | 'debit';
 }
+
+  export type RecentTransactionsState =
+    | { status: 'loading' }
+    | { status: 'error'; error: string }
+    | { status: 'success'; data: RecentTransaction[] };

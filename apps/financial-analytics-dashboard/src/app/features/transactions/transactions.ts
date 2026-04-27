@@ -22,6 +22,7 @@ export class Transactions implements OnInit {
   private search$ = new Subject<string>();
 
   transactions = signal<Transaction[]>([]);
+  errorMsg = '';
 
   //tabs
   selectedTab = signal<string>('all');
@@ -73,6 +74,7 @@ export class Transactions implements OnInit {
           this.loaderService.hide();
         },
         error: () => {
+          this.errorMsg = 'Failed to load transactions';
           this.loaderService.hide();
         }
       });

@@ -1,20 +1,23 @@
 <div class="">
     <h1 class="text-[#343C6A] font-bold">Balance History</h1>
     <div class="lg:w-[63rem] h-[16rem] bg-white rounded-2xl mt-3 p-2">
-        <ng-container *ngIf="balanceChart$ | async as chart, else loading">
-            <apx-chart
-                [series]="chart.series"
-                [chart]="chart.chart"
-                [xaxis]="chart.xaxis"
-                [dataLabels]="chart.dataLabels"
-                [grid]="chart.grid"
-                [stroke]="chart.stroke"
+        <ng-container *ngIf="balanceChart$ | async as state">
+            <!-- Loading -->
+            <div *ngIf="state.status === 'loading'" class="flex justify-center items-center h-full">
+                Loading...
+            </div>
+
+            <!-- Error -->
+            <div *ngIf="state.status === 'error'" class="text-red-500 flex justify-center items-center h-full">
+                {{ state.error }}
+            </div>
+
+            <!-- Success -->
+            <apx-chart *ngIf="state.status === 'success'" [series]="state.data.series" [chart]="state.data.chart"
+                [xaxis]="state.data.xaxis" [dataLabels]="state.data.dataLabels"
+                [grid]="state.data.grid"
+                [stroke]="state.data.stroke"
             ></apx-chart>
         </ng-container>
-        <ng-template #loading>
-            <div class="flex justify-center items-center h-full">
-                <p class="text-gray-500 text-lg">Loading...</p>
-            </div>
-        </ng-template>
     </div>
 </div>

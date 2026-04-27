@@ -1,24 +1,25 @@
 <div class="">
-    <h1 class="text-[#343C6A] font-bold" >Weekly Activity</h1>
+    <h1 class="text-[#343C6A] font-bold">Weekly Activity</h1>
     <div class="lg:w-[63rem] h-[20rem] bg-white rounded-2xl mt-3 p-2">
-        <ng-container *ngIf="weeklySpendChart$ | async as chart, else loading">
-            <apx-chart
-                [series]="chart.series"
-                [chart]="chart.chart"
-                [dataLabels]="chart.dataLabels"
-                [plotOptions]="chart.plotOptions"
-                [yaxis]="chart.yaxis"
-                [legend]="chart.legend"
-                [fill]="chart.fill"
-                [stroke]="chart.stroke"
-                [tooltip]="chart.tooltip"
-                [xaxis]="chart.xaxis"
-            ></apx-chart>
-        </ng-container>
-        <ng-template #loading>
-            <div class="flex justify-center items-center h-full">
-                <p class="text-gray-500 text-lg">Loading...</p>
+        <ng-container *ngIf="weeklySpendChart$ | async as state">
+
+            <!-- Loading -->
+            <div *ngIf="state.status === 'loading'" class="flex justify-center items-center h-full">
+                Loading...
             </div>
-        </ng-template>
+
+            <!-- Error -->
+            <div *ngIf="state.status === 'error'" class="text-red-500 flex justify-center items-center h-full">
+                {{ state.error }}
+            </div>
+
+            <!-- Success -->
+            <apx-chart *ngIf="state.status === 'success'" [series]="state.data.series" [chart]="state.data.chart"
+                [dataLabels]="state.data.dataLabels" [plotOptions]="state.data.plotOptions" [yaxis]="state.data.yaxis"
+                [legend]="state.data.legend" [fill]="state.data.fill" [stroke]="state.data.stroke"
+                [tooltip]="state.data.tooltip" [xaxis]="state.data.xaxis">
+            </apx-chart>
+
+        </ng-container>
     </div>
 </div>

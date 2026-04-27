@@ -16,3 +16,8 @@ export type ExpenseStaticsModel = {
   label: string;
   percent: number;
 }
+
+export type ExpenseStaticsState =
+  | { status: 'loading' }
+  | { status: 'error'; error: string }
+  | { status: 'success'; data: ExpenseStaticChart };

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { WeeklyActivityModel, WeeklySpendChart } from './weekly-activity.model';
+import { WeeklyActivityModel, WeeklySpendChart, WeeklyState } from './weekly-activity.model';
 import { WeeklyActivityService } from './weekly-activity.service';
-import { map } from 'rxjs';
+import { catchError, map, of, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-weekly-activity',
@@ -16,9 +16,20 @@ import { map } from 'rxjs';
 })
 export class WeeklyActivity {
   private weeklyActivityService = inject(WeeklyActivityService);
+  errorMessage = '';
 
   weeklySpendChart$ = this.weeklyActivityService.fetchWeeklyActivity().pipe(
-    map(txns => this.mapDataToChart(txns))
+    map(txns => ({
+      status: 'success',
+      data: this.mapDataToChart(txns)
+    } as WeeklyState)),
+    startWith({
+      status: 'loading'
+    } as WeeklyState),
+    catchError(() => of({
+      status: 'error',
+      error: 'Failed to load weekly activity'
+    } as WeeklyState))
   );
 
   mapDataToChart(data: WeeklyActivityModel[]): WeeklySpendChart {
