@@ -5,6 +5,7 @@ import { finalize } from "rxjs";
 import { LoginService } from "./login.service";
 import { TokenService } from "../../../core/services/token.service";
 import { CommonModule } from "@angular/common";
+import { LoaderService } from "../../../core/services/loader.service";
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class Login {
   private loginService = inject(LoginService);
   private router = inject(Router);
   private tokenService = inject(TokenService);
+  private loaderService = inject(LoaderService);
 
   loginForm = new FormGroup<{
     username: FormControl<string>;
@@ -28,7 +30,6 @@ export class Login {
     password: new FormControl('', { nonNullable: true, validators: [Validators.required] })
   });
 
-  isLoading = false;
   errorMessage = '';
 
   onSubmit() {
@@ -38,14 +39,14 @@ export class Login {
       return;
     }
 
-    this.isLoading = true;
+    this.loaderService.show();
     this.errorMessage = '';
 
     const payload = this.loginForm.getRawValue();
 
     this.loginService.login(payload)
       .pipe(
-        finalize(() => this.isLoading = false)
+        finalize(() => this.loaderService.hide())
       )
       .subscribe({
         next: (res: any) => {
