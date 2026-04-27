@@ -45,16 +45,15 @@ export class Login {
     const payload = this.loginForm.getRawValue();
 
     this.loginService.login(payload)
-      .pipe(
-        finalize(() => this.loaderService.hide())
-      )
       .subscribe({
         next: (res: any) => {
+          this.loaderService.hide()
           this.tokenService.setToken(res.token);
           this.router.navigate(['/main/dashboard']);
         },
         error: () => {
-          this.errorMessage = 'Invalid credentials';
+          this.loaderService.hide();
+          this.errorMessage = 'Invalid credentials!';
         }
       });
   }

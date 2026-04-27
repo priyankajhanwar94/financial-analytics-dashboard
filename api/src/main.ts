@@ -9,7 +9,7 @@ import { recentTransactions } from './data/recentTransactions';
 const app = express();
 const PAGE_SIZE = 10;
 const PORT = process.env.PORT || 5000;
-
+app.use(express.json());
 app.use(cors({ origin: '*' }));
 
 app.get('/', (_req, res) => {
@@ -17,6 +17,10 @@ app.get('/', (_req, res) => {
 });
 
 app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  if (username !== 'abc' || password !== '123') {
+    return res.status(401).send({ error: 'Invalid credentials' });
+  }
   const data = loginData;
   res.send(data);
 });

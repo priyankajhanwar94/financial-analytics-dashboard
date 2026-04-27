@@ -4,7 +4,14 @@
         <h1 class="text-2xl font-semibold text-center text-[#343C6A] mb-6">
             Login
         </h1>
-
+        <p class="text-sm text-center text-gray-500 mb-4">
+            Demo credentials: <b>username: abc & password: 123</b>
+        </p>
+        @if(errorMessage){
+            <p class="text-red-500 text-xl text-center mb-4">
+                {{ errorMessage }}
+            </p>
+        }
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
 
             <!-- Username -->
