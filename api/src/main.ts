@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import { transactions } from './data/transactions';
-import { delay } from 'rxjs';
 import { loginData } from './data/login';
 import { weeklyActivity } from './data/weeklyActivity';
 import { expenseStatics } from './data/expenseStatics';
@@ -24,22 +23,30 @@ app.post('/login', (req, res) => {
 
 app.get('/weekly-activity', (req, res) => {
   const data = weeklyActivity;
-  res.send(data);
+  setTimeout(() => {
+    res.send(data);
+  }, 1000);
 });
 
 app.get('/expense-statics', (req, res) => {
   const data = expenseStatics;
-  res.send(data);
+  setTimeout(() => {
+    res.send(data);
+  }, 1000);
 });
 
 app.get('/balance-history', (req, res) => {
   const data = balanceHistory;
-  res.send(data);
+  setTimeout(() => {
+    res.send(data);
+  }, 1000);
 });
 
 app.get('/recent-transactions', (req, res) => {
   const data = recentTransactions;
-  res.send(data);
+    setTimeout(() => {
+    res.send(data);
+  }, 1000);
 });
 
 app.get('/transactions', (req, res) => {
